@@ -91,6 +91,7 @@ async def skip(cli, message: Message, _, chat_id):
     queued = check[0]["file"]
     title = (check[0]["title"]).title()
     user = check[0]["by"]
+    theme = await check_theme(chat_id)
     streamtype = check[0]["streamtype"]
     videoid = check[0]["vidid"]
     status = True if str(streamtype) == "video" else None
@@ -113,8 +114,9 @@ async def skip(cli, message: Message, _, chat_id):
             await SARAH.skip_stream(chat_id, link, video=status, image=image)
         except:
             return await message.reply_text(_["call_6"])
+        theme = await check_theme(chat_id)
         button = stream_markup(_, chat_id)
-        img = await get_thumb(videoid)
+        img = await get_thumb(videoid, user_id, theme)
         run = await message.reply_photo(
             photo=img,
             caption=_["stream_1"].format(
@@ -147,8 +149,9 @@ async def skip(cli, message: Message, _, chat_id):
             await SARAH.skip_stream(chat_id, file_path, video=status, image=image)
         except:
             return await mystic.edit_text(_["call_6"])
+        theme = await check_theme(chat_id)
         button = stream_markup(_, chat_id)
-        img = await get_thumb(videoid)
+        img = await get_thumb(videoid, user_id, theme)
         run = await message.reply_photo(
             photo=img,
             caption=_["stream_1"].format(
@@ -217,8 +220,9 @@ async def skip(cli, message: Message, _, chat_id):
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "tg"
         else:
+            theme = await check_theme(chat_id)
             button = stream_markup(_, chat_id)
-            img = await get_thumb(videoid)
+            img = await get_thumb(videoid, user_id, theme)
             run = await message.reply_photo(
                 photo=img,
                 caption=_["stream_1"].format(
