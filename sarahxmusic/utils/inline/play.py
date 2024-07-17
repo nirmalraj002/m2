@@ -77,12 +77,6 @@ def stream_markup_timer(_, chat_id, played, dur):
                 text="↻ 𝐋ᴏᴏᴩ ↻", callback_data=f"ADMIN Loop|{chat_id}"
             ),
          ],
-        [
-            InlineKeyboardButton(text="⏮ 10", callback_data=f"ADMIN 1|{chat_id}"),
-            InlineKeyboardButton(text="⏮ 30", callback_data=f"ADMIN 3|{chat_id}"),
-            InlineKeyboardButton(text="⏭ 10", callback_data=f"ADMIN 2|{chat_id}"),
-            InlineKeyboardButton(text="⏭ 30", callback_data=f"ADMIN 4|{chat_id}"),             
-        ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
