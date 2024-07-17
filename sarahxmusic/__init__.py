@@ -20,7 +20,7 @@ from .platforms.Carbon import CarbonAPI
 from .platforms.Spotify import SpotifyAPI
 from .platforms.Resso import RessoAPI
 from .platforms.Telegram import TeleAPI
-from .platforms.YouTube import YouTubeAPI
+from .platforms.Youtube import YouTubeAPI
 from .platforms.Soundcloud import SoundAPI
 
 Apple = AppleAPI()
@@ -29,4 +29,4 @@ SoundCloud = SoundAPI()
 Spotify = SpotifyAPI()
 Resso = RessoAPI()
 Telegram = TeleAPI()
-YouTube = YouTubeAPI()
+Youtube = YouTubeAPI()
