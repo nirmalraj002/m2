@@ -36,13 +36,12 @@ def truncate(text):
     text2 = text2.strip()     
     return [text1,text2]
 
-async def get_thumb(videoid):
+async def get_thumb(videoid, user_id):
     try:
-        if os.path.isfile(f"cache/{videoid}.jpg"):
-            return f"cache/{videoid}.jpg"
-
+        if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
+            return f"cache/{videoid}_{user_id}.png"
         url = f"https://www.youtube.com/watch?v={videoid}"
-        if 1==1:
+        try:
             results = VideosSearch(url, limit=1)
             for result in (await results.next())["result"]:
                 try:
@@ -66,11 +65,10 @@ async def get_thumb(videoid):
                     channel = "Unknown Channel"
 
             async with aiohttp.ClientSession() as session:
-                async with session.get(f"http://img.youtube.com/vi/{videoid}/maxresdefault.jpg") as resp:
+                #async with session.get(f"http://img.youtube.com/vi/{videoid}/maxresdefault.jpg") as resp:
+                async with session.get(thumbnail) as resp:
                     if resp.status == 200:
-                        f = await aiofiles.open(
-                            f"cache/thumb{videoid}.jpg", mode="wb"
-                        )
+                        f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
                         await f.write(await resp.read())
                         await f.close()
 
@@ -128,20 +126,19 @@ async def get_thumb(videoid):
             image4.text((670, 300), text=title1[0], fill="white", stroke_width=1, stroke_fill="white",font = font3, align ="left") 
             image4.text((670, 350), text=title1[1], fill="white", stroke_width=1, stroke_fill="white", font = font3, align ="left") 
 
-            # description
-            views = f"Views : {views}"
-            duration = f"Duration : {duration} Mins"
-            channel = f"Channel : {channel}"
 
-            image4.text((670, 450), text=views, fill="white", font = font4, align ="left") 
-            image4.text((670, 500), text=duration, fill="white", font = font4, align ="left") 
-            image4.text((670, 550), text=channel, fill="white", font = font4, align ="left")
-            
+          
             image2 = ImageOps.expand(image2,border=20,fill=make_col())
             image2 = image2.convert('RGB')
             image2.save(f"cache/{videoid}.jpg")
             file = f"cache/{videoid}.jpg"
             return file
+        try:
+            os.remove(f"cache/thumb{videoid}.png")
+        except:
+            pass
+        background.save(f"cache/{videoid}_{user_id}.png")
+        return f"cache/{videoid}_{user_id}.png"
     except Exception as e:
         print(e)
         return YOUTUBE_IMG_URL
