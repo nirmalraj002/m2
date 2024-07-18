@@ -133,7 +133,7 @@ async def get_thumb(videoid, user_id):
             image2.save(f"cache/{videoid}.jpg")
             file = f"cache/{videoid}.jpg"
             #return file
-        try:
+        finally:
             os.remove(f"cache/thumb{videoid}.png")
         except:
             pass
