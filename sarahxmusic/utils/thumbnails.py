@@ -132,13 +132,8 @@ async def get_thumb(videoid, user_id):
             image2 = image2.convert('RGB')
             image2.save(f"cache/{videoid}.jpg")
             file = f"cache/{videoid}.jpg"
-            #return file
-        finally:
-            os.remove(f"cache/thumb{videoid}.png")
-        #except:
-            #pass
-        background.save(f"cache/{videoid}_{user_id}.png")
-        return f"cache/{videoid}_{user_id}.png"
+            return file
+        
     except Exception as e:
         print(e)
         return YOUTUBE_IMG_URL
