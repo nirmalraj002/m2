@@ -54,7 +54,7 @@ async def get_thumb(videoid):
                 try:
                     duration = result["duration"]
                 except:
-                    duration = "Unknown Mins"
+                    duration = "Unknown"
                 thumbnail = result["thumbnails"][0]["url"].split("?")[0]
                 try:
                     views = result["viewCount"]["short"]
@@ -82,7 +82,8 @@ async def get_thumb(videoid):
             background = enhancer.enhance(0.6)
             image2 = background
                                                                                             
-            circle = Image.open("sarahxmusic/assets/circle.png")
+            #circle = Image.open("sarahxmusic/assets/circle.png")
+            circle = Image.open("sarahxmusic/assets/rose2.png")
 
             # changing circle color
             im = circle
