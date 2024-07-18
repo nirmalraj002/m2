@@ -130,10 +130,9 @@ async def get_thumb(videoid, user_id):
           
             image2 = ImageOps.expand(image2,border=20,fill=make_col())
             image2 = image2.convert('RGB')
-            image2.save(f"cache/{videoid}.jpg")
-            file = f"cache/{videoid}.jpg"
-            return file
-        
+            image2.save(f"cache/{videoid}.png")
+            file = f"cache/{videoid}.png"
+            return file        
     except Exception as e:
         print(e)
         return YOUTUBE_IMG_URL
